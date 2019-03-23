@@ -1,11 +1,17 @@
 library ieee;
 use ieee.std_logic_1164.all;
+use IEEE.NUMERIC_STD.ALL;
 
 entity binary_4_bit_mul_top is
 end binary_4_bit_mul_top;
 
 architecture TEST of binary_4_bit_mul_top is
+
+--constant x: signed ( 7 downto 0 ) := "10011000" ;
+--constant y: signed ( 7 downto 0 ) := "00011010" ;
+--constant z: signed ( 7 downto 0 ) := "10010000" ;
 component binary_4_bit_mul_top
+
 Port ( 
 	   clk : in std_logic;
 	   NUM1 : in  STD_LOGIC_VECTOR (7 downto 0);
@@ -13,19 +19,8 @@ Port (
 	   NUM3 : in  STD_LOGIC_VECTOR (7 downto 0);
            SUM : out  STD_LOGIC_VECTOR (15 downto 0));
 
---port(EXP_TIME : in integer;
---NO_PICS : in integer;
---SHOW_TIME : in std_ulogic;
---E_ERROR : in std_ulogic;
---DISP_PHOTO : out integer);
 end component;
 
-
---signal W_EXP_TIME : integer := 0;
---signal W_NO_PICS : integer := 0;
---signal W_SHOW_TIME : std_ulogic := '0';
---signal W_E_ERROR : std_ulogic :='0';
---signal W_DISP_PHOTO : integer:= 0;
 
 -- signal has started
 
@@ -40,20 +35,13 @@ begin
 
 -- port mapping has started
 
-U0: binary_4_bit_mul_top port map (   clk,
-                                       NUM1,
-                                       NUM2,
-                                       NUM3,
-                                       SUM  );
+uut: binary_4_bit_mul_top port map (   clk => clk,
+                                       NUM1 => NUM1,
+                                       NUM2 => NUM2,
+                                       NUM3 => NUM3,
+                                       SUM => SUM );
 
 
---DUT : binary_4_bit_mul_top
---port map (
---EXP_TIME => W_EXP_TIME,
---E_ERROR=> W_E_ERROR,
---NO_PICS => W_NO_PICS,
---SHOW_TIME => W_SHOW_TIME,
---DISP_PHOTO => W_DISP_PHOTO);
 
 STIMULI : process
 --begin
@@ -86,3 +74,26 @@ end TEST;
 --for TEST
 --end for;
 --end CFG_binary_4_bit_mul_top;
+
+
+-- below code taken from auto generator
+
+
+configuration cfg_binary_4_bit_mul_top_tb of binary_4_bit_mul_top_tb is
+
+  for bench
+    for uut: binary_4_bit_mul_top
+      -- Default configuration
+    end for;
+  end for;
+end cfg_binary_4_bit_mul_top_tb;
+
+configuration cfg_binary_4_bit_mul_top_tb_Behavioral of binary_4_bit_mul_top_tb is
+  for bench
+    for uut: binary_4_bit_mul_top
+
+      use entity work.binary_4_bit_mul_top(Behavioral);
+
+    end for;
+  end for;
+end cfg_binary_4_bit_mul_top_tb_Behavioral;
